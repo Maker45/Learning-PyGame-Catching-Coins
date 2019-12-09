@@ -5,10 +5,6 @@ import pickle
 
 pygame.init()
 
-#Sounds play when arrow keys pushed. This file is from the Raspberry Pi Python Games examples to add this you
-#will need a Raspberry Pi.
-#soundA = pygame.mixer.Sound("match1.wav")
-
 
 black = [0, 0, 0]
 white = [255, 255, 255]
@@ -38,7 +34,7 @@ y = [300]
 
 try:
     #Adjust below as necessary, this was the location I used.. Create your own file in your preferred loacation..
-    load_file = open('/home/pi/Catching_coins/catch_the_coin_game_data_two.dat', 'rb')
+    load_file = open('catch_the_coin_game_data_two.dat', 'rb')
     loaded_game_data = pickle.load(load_file)
     data = loaded_game_data
     highscore = data['highscore_save_data']
@@ -61,7 +57,7 @@ class Game():
         data = {'highscore_save_data':'0', 'highscore_name_save':'computer'}
         data['highscore_save_data'] = highscore
         data['highscore_name_save'] = name
-        save_file = open('/home/pi/Catching_coins/catch_the_coin_game_data_two.dat','wb')
+        save_file = open('catch_the_coin_game_data_two.dat','wb')
         pickle.dump(data, save_file)
         save_file.close()
 
@@ -177,7 +173,7 @@ game_running = False
 
 clock = pygame.time.Clock()
 
-name = raw_input("Please enter your name: ")
+name = input("Please enter your name: ")
 
 game = Game(highscore,highscore_name)
 coin_class = Coin(x,y,coin)
@@ -191,10 +187,9 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-   	    pygame.quit()
+            pygame.quit()
 
         if event.type == pygame.KEYDOWN and timer > 0:
-            
             if event.key == pygame.K_LEFT:
                 player_class.player_position_x -= 10
                 #Uncomment if you have the sound file..
